@@ -1,11 +1,10 @@
+/*
 body {
   box-sizing: content-box;
 }
-
 #searchEdit {
   width: 50%;
 }
-
 #foundUsers {
   border: 1px solid #ccc;
   margin-top: 10px;
@@ -19,3 +18,4 @@ body {
   display: inline-block;
   width: 49%;
 }
+*/

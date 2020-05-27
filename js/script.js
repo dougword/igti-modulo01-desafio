@@ -71,7 +71,9 @@ function search() {
 function createLabelValue(label, value) {
   return `
     <div>
+      <h6 class="center">
       ${label}: <strong>${value}</strong>
+      </h6>
     </div>
   `;
 }
@@ -92,5 +94,43 @@ function render(foundUsers) {
   statisticsTitle.textContent = 'Estatísticas';
   details.innerHTML = statisticsHTML;
 
-  foundUsersTitle.textContent = 'usuário(s) encontrado(s)';
+  // Show found users
+  let title = `${foundUsers.length} usuário(s) encontrado(s)`;
+  let foundCards = createUserCards(foundUsers);
+
+  foundUsersTitle.textContent = title;
+  users.innerHTML = foundCards;
+}
+
+function createUserCards(foundUsers) {
+  let cards = '';
+  foundUsers.forEach((user) => {
+    /*
+    cards += `
+      <div>
+        <img src="${user.picture}" />
+        ${user.fullName}, ${user.age} anos.
+      </div>
+    `;
+    */
+    cards += `
+      <div class="col s12 l6 offset-l3">
+        <div class="card-panel grey lighten-5 z-depth-1">
+          <div class="valign-wrapper">
+            <div class="col s3">
+              <img src="${user.picture}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+            </div>
+            <div class="col s9">
+              <span class="black-text">
+              <h6>
+              ${user.fullName}, ${user.age} anos.
+              </h6>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>    
+    `;
+  });
+  return cards;
 }

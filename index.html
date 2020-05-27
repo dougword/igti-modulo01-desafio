@@ -3,27 +3,84 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <title>Desafio do Módulo 01</title>
   </head>
   <body>
-    <h1>Pesquisa de usuários</h1>
-
-    <form>
-      <input type="text" id="searchEdit" />
-      <input type="submit" value="Buscar" />
-    </form>
-
-    <div id="foundUsers">
-      <h1 id="foundUsersTitle">Nenhum usuário filtrado</h1>
-      <div id="users"></div>
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        <h1 class="header center">Pesquisa de usuários</h1>
+        <div class="row center">
+          <form>
+            <h5 class="header col s12 light valign-wrapper">
+              <div class="input-field col s10">
+                <input
+                  placeholder="Entre com o nome para buscar"
+                  id="searchEdit"
+                  type="text"
+                  class="validate"
+                />
+                <label for="searchEdit">Busca</label>
+              </div>
+              <button
+                class="btn waves-effect waves-light"
+                type="submit"
+                name="action"
+              >
+                Buscar
+              </button>
+            </h5>
+          </form>
+        </div>
+      </div>
     </div>
 
-    <div id="statistics">
-      <h1 id="statisticsTitle">Nada a ser exibido</h1>
-      <div id="details"></div>
-    </div>
+    <div class="container">
+      <div class="section">
+        
+        <div class="row">
+          <div class="col s12 m6 card">
+            <div class="icon-block">
+              <h2 class="center">
+                <i class="material-icons">people</i>
+              </h2>
+              <h5 class="center" id="foundUsersTitle">Nenhum usuário filtrado</h5>
 
+              <div id="foundUsers">
+                <div id="users"></div>
+              </div>
+              <p class="light">
+              </p>
+            </div>
+          </div>
+
+          <div class="col s12 offset-m1 m5 card">
+            <div class="icon-block">
+              <h2 class="center">
+                <i class="material-icons">dashboard</i>
+              </h2>
+              <h5 class="center" id="statisticsTitle">Nada a ser exibido</h5>
+
+              <p class="light">
+                <div id="statistics">
+                  <div id="details"></div>
+                </div>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>
