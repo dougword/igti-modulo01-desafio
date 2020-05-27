@@ -114,7 +114,7 @@ function createUserCards(foundUsers) {
     `;
     */
     cards += `
-      <div class="col s12 l6 offset-l3">
+      <div class="col s12">
         <div class="card-panel grey lighten-5 z-depth-1">
           <div class="valign-wrapper">
             <div class="col s3">
