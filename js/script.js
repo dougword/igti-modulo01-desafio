@@ -1,0 +1,96 @@
+let userList = [];
+let searchEdit = null;
+
+let foundUsersTitle = document.querySelector('#foundUsersTitle');
+let statisticsTitle = document.querySelector('#statisticsTitle');
+
+let users = document.querySelector('#users');
+let details = document.querySelector('#details');
+
+window.addEventListener('load', () => {
+  loadData();
+  loadComponents();
+  formHandle();
+});
+
+async function loadData() {
+  const res = await fetch(
+    'https://randomuser.me/api/?seed=javascript&results=100&nat=BR&noinfo'
+  );
+  const json = await res.json();
+  userList = json.results.map((user) => {
+    return {
+      fullName: `${user.name.first} ${user.name.last}`,
+      gender: user.gender,
+      age: user.dob.age,
+      picture: user.picture.thumbnail,
+    };
+  });
+  userList.sort((a, b) => a.fullName.localeCompare(b.fullName));
+}
+
+function loadComponents() {
+  searchEdit = document.querySelector('#searchEdit');
+}
+
+function formHandle() {
+  let form = document.querySelector('form');
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    search();
+  });
+}
+
+function countGender(users, gender) {
+  return users.reduce((acc, current) => (acc += current.gender == gender), 0);
+}
+
+function sumAges(users) {
+  return users.reduce((acc, current) => (acc += current.age), 0);
+}
+
+function avgAges(users) {
+  return users.length > 0 ? sumAges(users) / users.length : 0;
+}
+
+function search() {
+  // Get search text, if empty clear fields
+  let searchText = searchEdit.value.toLowerCase().trim();
+  let foundUsers = [];
+  if (searchText.length > 0) {
+    // Search for users according to text field
+    foundUsers = userList.filter((user) =>
+      user.fullName.toLowerCase().includes(searchText)
+    );
+  }
+
+  render(foundUsers);
+}
+
+function createLabelValue(label, value) {
+  return `
+    <div>
+      ${label}: <strong>${value}</strong>
+    </div>
+  `;
+}
+
+function render(foundUsers) {
+  // Calculate statistics for foundUsers
+  let maleCount = countGender(foundUsers, 'male');
+  let femaleCount = countGender(foundUsers, 'female');
+  let ageSum = sumAges(foundUsers);
+  let ageAverage = avgAges(foundUsers);
+
+  let statisticsHTML =
+    createLabelValue('Sexo masculino', maleCount) +
+    createLabelValue('Sexo feminino', femaleCount) +
+    createLabelValue('Soma das idades', ageSum) +
+    createLabelValue('Média das idades', ageAverage.toFixed(2));
+
+  statisticsTitle.textContent = 'Estatísticas';
+  details.innerHTML = statisticsHTML;
+
+  foundUsersTitle.textContent = 'usuário(s) encontrado(s)';
+}
